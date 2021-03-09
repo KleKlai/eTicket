@@ -18,13 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [TicketInformationController::class, 'index'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+    Route::get('/dashboard', [TicketInformationController::class, 'index'])->name('dashboard');
+    Route::patch('/ticket/register', [TicketInformationController::class, 'update'])->name('ticket.register');
+    Route::post('/ticket/import', [TicketInformationController::class, 'import'])->name('ticket.import');
 
-Route::patch('/ticket/register', [TicketInformationController::class, 'update'])->name('ticket.register');
-Route::post('/ticket/import', [TicketInformationController::class, 'import'])->name('ticket.import');
+});
 
 require __DIR__.'/auth.php';
