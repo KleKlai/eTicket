@@ -17,7 +17,7 @@ class CreateTicketInformationTable extends Migration
             $table->id();
             $table->string('ticket_code')->unique();
             $table->string('name')->nullable();
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
