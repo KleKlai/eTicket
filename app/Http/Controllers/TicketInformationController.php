@@ -17,9 +17,10 @@ class TicketInformationController extends Controller
      */
     public function index()
     {
-        $ticket = TicketInformation::all();
+        $ticket     = TicketInformation::all();
+        $activated  = TicketInformation::whereNotNull('name')->get();
 
-        return view('dashboard', compact('ticket'));
+        return view('dashboard', compact('ticket', 'activated'));
     }
 
     /**

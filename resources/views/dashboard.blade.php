@@ -28,7 +28,7 @@
                         </svg>
                     </div>
                     <div class="flex flex-col justify-center">
-                        <div class="text-lg">53/100</div>
+                        <div class="text-lg">{{ $activated->count() }} / {{ $ticket->count() }}</div>
                         <div class="text-sm text-gray-400">Sales</div>
                     </div>
                 </div>
@@ -76,17 +76,8 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">GSV512</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">Maynard Magallen</div>
-                                    <div class="text-sm text-gray-500">magallenmaynards@gmail.com</div>
-                                </td>
-                            </tr>
 
-                            @foreach($ticket as $tickets)
+                            @forelse($ticket as $tickets)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">{{ $tickets->ticket_code }}</div>
@@ -96,7 +87,11 @@
                                         <div class="text-sm text-gray-500">{{ $tickets->email }}</div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="2" class="px-6 py-4 whitespace-nowrap text-center text-gray-200">Insufficient Data</td>
+                                </tr>
+                            @endforelse
 
                         </tbody>
                         </table>
